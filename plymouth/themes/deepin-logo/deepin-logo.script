@@ -1,0 +1,200 @@
+# Copyright (C) 2011 ~ 2012 Deepin, Inc.
+#               2011 ~ 2012 Hou Shaohui
+# 
+# Author:     Hou Shaohui <houshao55@gmail.com>
+# Maintainer: Hou Shaohui <houshao55@gmail.com>
+# 
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# Set Background Color
+Window.SetBackgroundTopColor(0, 0, 0);
+Window.SetBackgroundBottomColor(0, 0, 0);
+
+# Show logo
+logo.image = Image("logo.png");
+logo.sprite = Sprite(logo.image);
+logo.x = Window.GetX() + Window.GetWidth() / 2 - logo.image.GetWidth() / 2;
+logo.y = Window.GetY() + Window.GetHeight() / 2 - logo.image.GetHeight();
+logo.sprite.SetPosition(logo.x, logo.y, 10000);
+
+#-------------------------- splash message ---------------------------------------
+splash_message.boot_image = Image.Text("Starting Up...", 1.0, 1.0, 1.0, 1.0, "Sans 11");
+splash_message.shutdown_image = Image.Text("Shuting Down...", 1.0, 1.0, 1.0, 1.0, "Sans 11");
+splash_message.sprite = Sprite();
+splash_message.boot_x = Window.GetX() + (Window.GetWidth() - splash_message.boot_image.GetWidth()) / 2;
+splash_message.shutdown_x = Window.GetX() + (Window.GetWidth() - splash_message.shutdown_image.GetWidth()) / 2;
+splash_message.offset_y = 20;
+splash_message.y = Window.GetY() + (Window.GetHeight() / 2) + splash_message.offset_y;
+
+
+if (Plymouth.GetMode() == "boot")
+{
+    splash_message.sprite.SetImage(splash_message.boot_image);
+    splash_message.sprite.SetPosition(splash_message.boot_x, splash_message.y, 10000);
+} else 
+{
+    splash_message.sprite.SetImage(splash_message.shutdown_image);
+    splash_message.sprite.SetPosition(splash_message.shutdown_x, splash_message.y, 10000);
+}
+
+#------------------------------------ Progressbar ----------------------------------
+
+progressbar_bg.image = Image("progressbar_bg.png");
+progressbar_bg.sprite = Sprite(progressbar_bg.image);
+progressbar_bg.width = progressbar_bg.image.GetWidth();
+progressbar_bg.offset_y = splash_message.offset_y + splash_message.boot_image.GetHeight() + 10;
+progressbar_bg.x = Window.GetX() + Window.GetWidth() / 2 - progressbar_bg.image.GetWidth() / 2;
+progressbar_bg.y = Window.GetX() + Window.GetHeight() / 2 + progressbar_bg.offset_y;
+progressbar_bg.sprite.SetPosition(progressbar_bg.x, progressbar_bg.y, 0);
+
+progressbar_fg.y = progressbar_bg.y;
+progressbar_fg.width = progressbar_bg.width;
+
+progressbar_fg.left_image = Image("fg_left.png");
+progressbar_fg.left_width =  progressbar_fg.left_image.GetWidth();
+progressbar_fg.left_start_x = progressbar_bg.x;
+progressbar_fg.left_end_x =  progressbar_bg.x + progressbar_fg.left_image.GetWidth();
+progressbar_fg.left_sprite = Sprite(progressbar_fg.left_image);
+progressbar_fg.left_sprite.SetPosition(progressbar_fg.left_start_x, progressbar_fg.y, 1);
+
+progressbar_fg.right_image = Image("fg_right.png");
+progressbar_fg.right_start_x = progressbar_fg.left_start_x + progressbar_fg.width - progressbar_fg.right_image.GetWidth();
+progressbar_fg.right_sprite = Sprite();
+progressbar_fg.right_width = progressbar_fg.right_image.GetWidth();
+progressbar_fg.right_sprite.SetPosition(progressbar_fg.right_start_x, progressbar_fg.y, 1);
+
+progressbar_fg.original_image = Image("fg_center.png");
+progressbar_fg.center_sprite = Sprite();
+progressbar_fg.center_x = progressbar_fg.left_end_x;
+progressbar_fg.center_width = progressbar_fg.width - progressbar_fg.left_width - progressbar_fg.right_width; 
+progressbar_fg.center_sprite.SetPosition(progressbar_fg.center_x, progressbar_fg.y, 1);
+
+
+
+fun progress_callback(time, progress)
+  {
+      current_width = Math.Int(progress * progressbar_fg.width);
+      if ( progressbar_fg.left_image.GetWidth() <= current_width <= progressbar_fg.width - progressbar_fg.right_width)
+      {
+          adjust_width = Math.Int(progressbar_fg.center_width * progress);
+          adjust_height = progressbar_fg.original_image.GetHeight();
+          progressbar_fg.center_image = progressbar_fg.original_image.Scale(adjust_width, adjust_height);
+          progressbar_fg.center_sprite.SetImage (progressbar_fg.center_image);
+      } 
+      # else if (current_width > progressbar_fg.width - progress_fg.right_width)
+      # {
+      #     progressbar_fg.right_sprite.SetImage(progressbar_fg.right_image);
+      # }
+      
+  }
+
+Plymouth.SetBootProgressFunction(progress_callback);
+
+#----------------------------------------- Dialogue --------------------------------
+
+status = "normal";
+
+fun dialog_setup()
+  {
+    local.box;
+    local.lock;
+    local.entry;
+    
+    box.image = Image("box.png");
+    lock.image = Image("lock.png");
+    entry.image = Image("entry.png");
+    
+    box.sprite = Sprite(box.image);
+    box.x = Window.GetX() + Window.GetWidth()  / 2 - box.image.GetWidth ()/2;
+    box.y = Window.GetY() + Window.GetHeight() / 2 - box.image.GetHeight()/2;
+    box.z = 10000;
+    box.sprite.SetPosition(box.x, box.y, box.z);
+    
+    lock.sprite = Sprite(lock.image);
+    lock.x = box.x + box.image.GetWidth()/2 - (lock.image.GetWidth() + entry.image.GetWidth()) / 2;
+    lock.y = box.y + box.image.GetHeight()/2 - lock.image.GetHeight()/2;
+    lock.z = box.z + 1;
+    lock.sprite.SetPosition(lock.x, lock.y, lock.z);
+    
+    entry.sprite = Sprite(entry.image);
+    entry.x = lock.x + lock.image.GetWidth();
+    entry.y = box.y + box.image.GetHeight()/2 - entry.image.GetHeight()/2;
+    entry.z = box.z + 1;
+    entry.sprite.SetPosition(entry.x, entry.y, entry.z);
+    
+    global.dialog.box = box;
+    global.dialog.lock = lock;
+    global.dialog.entry = entry;
+    global.dialog.bullet_image = Image("bullet.png");
+    dialog_opacity (1);
+  }
+    
+fun dialog_opacity(opacity)
+  {
+    dialog.box.sprite.SetOpacity (opacity);
+    dialog.lock.sprite.SetOpacity (opacity);
+    dialog.entry.sprite.SetOpacity (opacity);
+    for (index = 0; dialog.bullet[index]; index++)
+      {
+        dialog.bullet[index].sprite.SetOpacity(opacity);
+      }
+  }
+
+fun display_normal_callback ()
+  {
+    global.status = "normal";
+    if (global.dialog)
+      dialog_opacity (0);
+  }
+
+fun display_password_callback (prompt, bullets)
+  {
+    global.status = "password";
+    if (!global.dialog)
+	dialog_setup();
+    else
+	dialog_opacity(1);
+    for (index = 0; dialog.bullet[index] || index < bullets; index++)
+      {
+        if (!dialog.bullet[index])
+          {
+            dialog.bullet[index].sprite = Sprite(dialog.bullet_image);
+            dialog.bullet[index].x = dialog.entry.x + index * dialog.bullet_image.GetWidth();
+            dialog.bullet[index].y = dialog.entry.y + dialog.entry.image.GetHeight() / 2 - dialog.bullet_image.GetHeight() / 2;
+            dialog.bullet[index].z = dialog.entry.z + 1;
+            dialog.bullet[index].sprite.SetPosition(dialog.bullet[index].x, dialog.bullet[index].y, dialog.bullet[index].z);
+          }
+        if (index < bullets)
+          dialog.bullet[index].sprite.SetOpacity(1);
+        else
+          dialog.bullet[index].sprite.SetOpacity(0);
+      }
+  }
+
+Plymouth.SetDisplayNormalFunction(display_normal_callback);
+Plymouth.SetDisplayPasswordFunction(display_password_callback);
+
+
+#----------------------------------------- Message --------------------------------
+
+message_sprite = Sprite();
+message_sprite.SetPosition(Window.GetX() + 10, Window.GetY() + 10, 10000);
+
+fun message_callback (text)
+{
+  my_image = Image.Text(text, 1, 1, 1);
+  message_sprite.SetImage(my_image);
+}
+
+Plymouth.SetMessageFunction(message_callback);

@@ -1,0 +1,12 @@
+[Plymouth Theme]
+Name=Deepin Text
+Description=Text mode theme based on deepin-logo theme
+ModuleName=deepin-text
+
+[deepin-text]
+title=Linux Deepin
+black=0x000000
+white=0xffffff
+brown=0x84BD55
+blue=0x9D9FA0
+
