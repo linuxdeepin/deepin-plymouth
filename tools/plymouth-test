@@ -1,0 +1,3 @@
+#!/bin/bash
+
+plymouthd --debug --debug-file=/tmp/plymouth-debug-out; plymouth --show-splash; for ((I=0; I<10; I++)); do plymouth --update=test$I;  sleep 1; done; plymouth quit
