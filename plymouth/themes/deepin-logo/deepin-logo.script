@@ -49,6 +49,7 @@ progressbar_fg.width = progressbar_fg.image.GetWidth();
 progressbar_fg.sprite.SetPosition(progressbar_fg.x, progressbar_fg.y, 0);
 
 is_forward = 1;
+x_step = 5;
 fun boot_callback() 
 {
     progressbar_bg.sprite.SetOpacity(1);
@@ -63,11 +64,11 @@ fun boot_callback()
     }
     if (is_forward) 
     {
-        progressbar_fg.x += 2;
+        progressbar_fg.x += x_step;
     } 
     else 
     {
-        progressbar_fg.x -= 2;
+        progressbar_fg.x -= x_step;
     }
       
     progressbar_fg.sprite.SetPosition(progressbar_fg.x, progressbar_fg.y, 0);
