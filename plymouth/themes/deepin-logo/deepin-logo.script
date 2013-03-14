@@ -49,61 +49,50 @@ progressbar_bg.sprite.SetPosition(progressbar_bg.x, progressbar_bg.y, 0);
 
 progressbar_fg.y = progressbar_bg.y;                                            
 progressbar_fg.width = progressbar_bg.width;                                    
-                                                                                
-progressbar_fg.left_image = Image("fg_left.png");                               
-progressbar_fg.left_width =  progressbar_fg.left_image.GetWidth();              
-progressbar_fg.left_start_x = progressbar_bg.x;                                 
-progressbar_fg.left_end_x =  progressbar_bg.x + progressbar_fg.left_image.GetWidth();
-progressbar_fg.left_sprite = Sprite(progressbar_fg.left_image);                 
-progressbar_fg.left_sprite.SetOpacity(0);
-progressbar_fg.left_sprite.SetPosition(progressbar_fg.left_start_x, progressbar_fg.y, 1); 
-                                                                                
-progressbar_fg.right_image = Image("fg_right.png");                             
-progressbar_fg.right_start_x = progressbar_fg.left_start_x + progressbar_fg.width - progressbar_fg.right_image.GetWidth();
-progressbar_fg.right_sprite = Sprite();                                         
-progressbar_fg.right_width = progressbar_fg.right_image.GetWidth();             
-progressbar_fg.right_sprite.SetPosition(progressbar_fg.right_start_x, progressbar_fg.y, 1);
-                                                                                
-progressbar_fg.original_image = Image("fg_center.png");                         
-progressbar_fg.center_sprite = Sprite();                                        
-progressbar_fg.center_x = progressbar_fg.left_end_x;
-progressbar_fg.center_width = progressbar_fg.width - progressbar_fg.left_width - progressbar_fg.right_width;
-progressbar_fg.center_sprite.SetPosition(progressbar_fg.center_x, progressbar_fg.y, 1);
 
+progressbar_fg.image = Image("progressbar_fg.png");
+progressbar_fg.sprite = Sprite(progressbar_fg.image);
+progressbar_fg.sprite.SetOpacity(0);
+progressbar_fg.x = progressbar_bg.x;
+progressbar_fg.width = progressbar_fg.image.GetWidth();
+progressbar_fg.sprite.SetPosition(progressbar_fg.x, progressbar_fg.y, 0);
+
+is_forward = 1;
 fun boot_callback() 
 {
     progressbar_bg.sprite.SetOpacity(1);
-    progressbar_fg.left_sprite.SetOpacity(1);
+    progressbar_fg.sprite.SetOpacity(1);
+    if (progressbar_fg.x <= progressbar_bg.x) 
+    {
+        is_forward = 1;
+    }
+    if (progressbar_fg.x >= progressbar_bg.x + progressbar_bg.width - progressbar_fg.width) 
+    {
+        is_forward = 0;
+    }
+    if (is_forward) 
+    {
+        progressbar_fg.x += 2;
+    } 
+    else 
+    {
+        progressbar_fg.x -= 2;
+    }
+      
+    progressbar_fg.sprite.SetPosition(progressbar_fg.x, progressbar_fg.y, 0);
 }
 
-is_boot = 0;
 if (Plymouth.GetMode() == "boot")
 {
-    is_boot = 1;
     splash_message.sprite.SetImage(splash_message.boot_image);
     splash_message.sprite.SetPosition(splash_message.boot_x, splash_message.y, 10000);
     Plymouth.SetRefreshFunction(boot_callback);
 } 
 else 
 {
-    is_boot = 0;
     splash_message.sprite.SetImage(splash_message.shutdown_image);
     splash_message.sprite.SetPosition(splash_message.shutdown_x, splash_message.y, 10000);
 }
-
-fun progress_callback(time, progress) 
-{
-    current_width = Math.Int(progress * progressbar_fg.width);
-    if (is_boot && progressbar_fg.left_image.GetWidth() <= current_width <= progressbar_fg.width - progressbar_fg.right_width)
-    {
-        adjust_width = Math.Int(progressbar_fg.center_width * progress);
-        adjust_height = progressbar_fg.original_image.GetHeight();
-        progressbar_fg.center_image = progressbar_fg.original_image.Scale(adjust_width, adjust_height);
-        progressbar_fg.center_sprite.SetImage (progressbar_fg.center_image);
-    } 
-}
-
-Plymouth.SetBootProgressFunction(progress_callback);
 
 #----------------------------------------- Dialogue --------------------------------
 
