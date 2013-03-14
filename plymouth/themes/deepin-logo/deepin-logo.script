@@ -28,21 +28,12 @@ logo.x = Window.GetX() + Window.GetWidth() / 2 - logo.image.GetWidth() / 2;
 logo.y = Window.GetY() + Window.GetHeight() / 2 - logo.image.GetHeight();
 logo.sprite.SetPosition(logo.x, logo.y, 10000);
 
-#-------------------------- splash message ---------------------------------------
-splash_message.boot_image = Image("booting.png");
-splash_message.shutdown_image = Image.Text("正在关闭", 1.0, 1.0, 1.0, 1.0, "Sans 11");
-splash_message.sprite = Sprite();
-splash_message.boot_x = Window.GetX() + (Window.GetWidth() - splash_message.boot_image.GetWidth()) / 2;
-splash_message.shutdown_x = Window.GetX() + (Window.GetWidth() - splash_message.shutdown_image.GetWidth()) / 2;
-splash_message.offset_y = 20;
-splash_message.y = Window.GetY() + (Window.GetHeight() / 2) + splash_message.offset_y;
-
 #-----------------------------------ProgressBar-------------------------------------
 progressbar_bg.image = Image("progressbar_bg.png");                             
 progressbar_bg.sprite = Sprite(progressbar_bg.image);
 progressbar_bg.sprite.SetOpacity(0);                           
 progressbar_bg.width = progressbar_bg.image.GetWidth();                         
-progressbar_bg.offset_y = splash_message.offset_y + splash_message.boot_image.GetHeight() + 10; 
+progressbar_bg.offset_y = 10; 
 progressbar_bg.x = Window.GetX() + Window.GetWidth() / 2 - progressbar_bg.image.GetWidth() / 2;
 progressbar_bg.y = Window.GetX() + Window.GetHeight() / 2 + progressbar_bg.offset_y;
 progressbar_bg.sprite.SetPosition(progressbar_bg.x, progressbar_bg.y, 0);          
@@ -82,16 +73,22 @@ fun boot_callback()
     progressbar_fg.sprite.SetPosition(progressbar_fg.x, progressbar_fg.y, 0);
 }
 
+reboot_opacity = 1.0;
+fun reboot_callback() 
+{
+    if (reboot_opacity > 0.3) {
+        reboot_opacity -= 0.005;
+        logo.sprite.SetOpacity(reboot_opacity);
+    }
+}
+
 if (Plymouth.GetMode() == "boot")
 {
-    splash_message.sprite.SetImage(splash_message.boot_image);
-    splash_message.sprite.SetPosition(splash_message.boot_x, splash_message.y, 10000);
     Plymouth.SetRefreshFunction(boot_callback);
 } 
 else 
 {
-    splash_message.sprite.SetImage(splash_message.shutdown_image);
-    splash_message.sprite.SetPosition(splash_message.shutdown_x, splash_message.y, 10000);
+    Plymouth.SetRefreshFunction(reboot_callback);
 }
 
 #----------------------------------------- Dialogue --------------------------------
