@@ -3,6 +3,7 @@
 # 
 # Author:     Hou Shaohui <houshao55@gmail.com>
 # Maintainer: Hou Shaohui <houshao55@gmail.com>
+#             Zhai Xiang <zhaixiang@linuxdeepin.com>
 # 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,56 +29,65 @@ logo.x = Window.GetX() + Window.GetWidth() / 2 - logo.image.GetWidth() / 2;
 logo.y = Window.GetY() + Window.GetHeight() / 2 - logo.image.GetHeight();
 logo.sprite.SetPosition(logo.x, logo.y, 10000);
 
-#-----------------------------------ProgressBar-------------------------------------
-progressbar_bg.image = Image("progressbar_bg.png");                             
-progressbar_bg.sprite = Sprite(progressbar_bg.image);
-progressbar_bg.sprite.SetOpacity(0);                           
-progressbar_bg.width = progressbar_bg.image.GetWidth();                         
-progressbar_bg.offset_y = 10; 
-progressbar_bg.x = Window.GetX() + Window.GetWidth() / 2 - progressbar_bg.image.GetWidth() / 2;
-progressbar_bg.y = Window.GetX() + Window.GetHeight() / 2 + progressbar_bg.offset_y;
-progressbar_bg.sprite.SetPosition(progressbar_bg.x, progressbar_bg.y, 0);          
+# Loading
+for (i = 1; i <= 10; i++) 
+{
+    loading[i].image = Image("loading_" + i + ".png");
+    loading[i].sprite = Sprite(loading[i].image);
+    loading[i].sprite.SetOpacity(0);
+    loading[i].offset_y = 10; 
+    loading[i].x = Window.GetX() + Window.GetWidth() / 2 - loading[i].image.GetWidth() / 2;
+    loading[i].y = Window.GetX() + Window.GetHeight() / 2 + loading[i].offset_y;
+    loading[i].sprite.SetPosition(loading[i].x, loading[i].y, 0);
+}
 
-progressbar_fg.y = progressbar_bg.y;                                            
-progressbar_fg.width = progressbar_bg.width;                                    
-
-progressbar_fg.image = Image("progressbar_fg.png");
-progressbar_fg.sprite = Sprite(progressbar_fg.image);
-progressbar_fg.sprite.SetOpacity(0);
-progressbar_fg.x = progressbar_bg.x;
-progressbar_fg.width = progressbar_fg.image.GetWidth();
-progressbar_fg.sprite.SetPosition(progressbar_fg.x, progressbar_fg.y, 0);
-
+index = 1;
 is_forward = 1;
-x_step = 5;
+time = 1;
 fun boot_callback() 
 {
-    progressbar_bg.sprite.SetOpacity(1);
-    progressbar_fg.sprite.SetOpacity(1);
-    if (progressbar_fg.x <= progressbar_bg.x) 
+    time++;
+    # 50 frames per second, so here 5 means 0.1 second
+    if (time < 12) 
+    {
+        return;
+    } 
+
+    if (index <= 1) 
     {
         is_forward = 1;
     }
-    if (progressbar_fg.x >= progressbar_bg.x + progressbar_bg.width - progressbar_fg.width) 
+    if (index >= 10) 
     {
         is_forward = 0;
     }
+    for (i = 1; i <= 10; i++) 
+    {
+        if (index != i) 
+        {
+            loading[i].sprite.SetOpacity(0);
+        } 
+        else 
+        {
+            loading[i].sprite.SetOpacity(1);
+        }
+    }
     if (is_forward) 
     {
-        progressbar_fg.x += x_step;
+        index++;
     } 
     else 
     {
-        progressbar_fg.x -= x_step;
+        index--;
     }
-      
-    progressbar_fg.sprite.SetPosition(progressbar_fg.x, progressbar_fg.y, 0);
+
+    time = 1;
 }
 
 reboot_opacity = 1.0;
 fun reboot_callback() 
 {
-    if (reboot_opacity > 0.3) {
+    if (reboot_opacity > 0.2) {
         reboot_opacity -= 0.005;
         logo.sprite.SetOpacity(reboot_opacity);
     }
