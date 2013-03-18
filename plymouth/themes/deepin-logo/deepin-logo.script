@@ -69,7 +69,7 @@ fun boot_callback()
         } 
         else 
         {
-            loading[i].sprite.SetOpacity(1);
+            loading[i].sprite.SetOpacity(0.68);
         }
     }
     if (is_forward) 
