@@ -25,14 +25,14 @@ Window.SetBackgroundBottomColor(0, 0, 0);
 logo.image = Image("logo.png");
 logo.sprite = Sprite(logo.image);
 logo.x = Window.GetX() + Window.GetWidth() / 2 - logo.image.GetWidth() / 2;
-logo.y = Window.GetY() + Window.GetHeight() / 2 - logo.image.GetHeight();
+logo.y = Window.GetY() + Window.GetHeight() / 2 - logo.image.GetHeight() / 2;
 logo.sprite.SetPosition(logo.x, logo.y, 10000);
 
 boot.image = Image("boot.png");
 boot.sprite = Sprite(boot.image);
 boot.sprite.SetOpacity(0);
 boot.x = Window.GetX() + Window.GetWidth() / 2 - boot.image.GetWidth() / 2;
-boot.y = Window.GetX() + Window.GetHeight() / 2 + 1;
+boot.y = logo.y + logo.image.GetHeight() + 10;
 boot.sprite.SetPosition(boot.x, boot.y, 0);
 
 fun boot_callback() 
