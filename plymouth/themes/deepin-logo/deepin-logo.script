@@ -23,16 +23,17 @@ Window.SetBackgroundTopColor(0, 0, 0);
 Window.SetBackgroundBottomColor(0, 0, 0);
 
 # Show logo
-logo.image = Image("loading2_100.png");
+logo.image = Image("loading2_300.png");
 logo.sprite = Sprite(logo.image);
 logo.x = Window.GetX() + Window.GetWidth() / 2 - logo.image.GetWidth() / 2;
 logo.y = Window.GetY() + Window.GetHeight() / 2 - loading[i].image.GetHeight() / 2;
 logo.sprite.SetPosition(logo.x, logo.y, 10000);
 logo.sprite.SetOpacity(0);
 
+image_total = 300;
 
 # Loading
-for (i = 1; i <= 100; i++) 
+for (i = 1; i <= image_total; i++) 
 {
     loading[i].image = Image("loading2_" + i + ".png");
     loading[i].sprite = Sprite(loading[i].image);
@@ -48,12 +49,12 @@ flag = 1;
 fun boot_callback() 
 {
     # 50 frames per second
-	if (index >= 101) {
+	if (index >= image_total + 1) {
 		logo.sprite.SetOpacity(1);
 		
  	} else {
-	    if (flag % 3 == 0) {
-	    	for (i = 1; i <= 100; i++) 
+	    if (flag % 2 == 0) {
+	    	for (i = 1; i <= image_total; i++) 
 	    	{
 	    		if (index != i) 
 	    		{
@@ -90,7 +91,7 @@ else
 
 fun quit_callback() 
 {
-    for (i = 1; i <= 100; i++)                                                  
+    for (i = 1; i <= image_total; i++)                                                  
     {                                                                           
         loading[i].sprite.SetOpacity(0);                                    
     }
