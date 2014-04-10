@@ -85,22 +85,22 @@ reboot_index = 1;
 fun reboot_callback() 
 {
     # 50 frames per second
-	if (reboot_index >= image_total + 1) {
-		shutdown[300].sprite.SetOpacity(1);
- 	} else {
-	    for (i = 1; i <= image_total; i++) 
-	    {
-	    	if (reboot_index != i) 
-	    	{
-	    		shutdown[i].sprite.SetOpacity(0);
-	    	} 
-	    	else 
-	    	{
-	    		shutdown[i].sprite.SetOpacity(1);
-	    	}
-	    }
-	    reboot_index++;
-	}
+    for(j=1; j<=2; j++){
+        if (reboot_index >= image_total + 1) {
+            shutdown[300].sprite.SetOpacity(1);
+        }
+        else {
+            for (i = 1; i <= image_total; i++){
+                if (reboot_index != i){
+                    shutdown[i].sprite.SetOpacity(0);
+                } 
+                else{
+                    shutdown[i].sprite.SetOpacity(1);
+                }
+            }
+            reboot_index++;
+        }
+    }
 }
 
 if (Plymouth.GetMode() == "boot")
