@@ -85,7 +85,7 @@ reboot_index = 1;
 fun reboot_callback() 
 {
     # 50 frames per second
-    for(j=1; j<=2; j++){
+    for(j=1; j<=3; j++){
         if (reboot_index >= image_total + 1) {
             shutdown[300].sprite.SetOpacity(1);
         }
