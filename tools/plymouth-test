@@ -1,0 +1,9 @@
+#!/bin/bash
+
+plymouthd --debug --debug-file=/tmp/plymouth-debug.log --mode='shutdown' --tty='tty3' --kernel-command-line='quiet-splash';
+plymouth --show-splash;
+for ((I=0; I<10; I++));
+do plymouth --update=test$I;
+    sleep 1;
+done;
+plymouth quit

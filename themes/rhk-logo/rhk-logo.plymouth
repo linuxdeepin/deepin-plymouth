@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=RHK-logo
+Description=RHK-logo plugin. 
+ModuleName=script
+
+[script]
+ImageDir=/lib/plymouth/themes/rhk-logo
+ScriptFile=/lib/plymouth/themes/rhk-logo/rhk-logo.script
