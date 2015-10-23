@@ -4,5 +4,5 @@ Description=Deepin-logo plugin.
 ModuleName=script
 
 [script]
-ImageDir=/lib/plymouth/themes/deepin-logo
-ScriptFile=/lib/plymouth/themes/deepin-logo/deepin-logo.script
+ImageDir=/usr/share/plymouth/themes/deepin-logo
+ScriptFile=/usr/share/plymouth/themes/deepin-logo/deepin-logo.script
