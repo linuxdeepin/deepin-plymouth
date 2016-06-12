@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Deepin
+Description=A theme that features a blank background with a logo.
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/deepin
+ScriptFile=/usr/share/plymouth/themes/deepin/deepin.script
