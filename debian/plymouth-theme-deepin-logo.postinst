@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -ex
 # This script can be called in the following ways:
 #
 # After the package was installed:
@@ -18,21 +18,16 @@
 
 case "$1" in
     configure)
-	update-alternatives \
-		--install /lib/plymouth/themes/default.plymouth default.plymouth \
-		/lib/plymouth/themes/deepin-logo/deepin-logo.plymouth 120 \
-		--slave /lib/plymouth/themes/default.grub default.plymouth.grub \
-		/lib/plymouth/themes/deepin-logo/deepin-logo.grub
-
-	if which update-initramfs >/dev/null 2>&1
-	then
-	    update-initramfs -u
-	fi
+	DISK_INFO=`lsblk  -P -o NAME,MOUNTPOINT,PKNAME|grep 'MOUNTPOINT="/"'`|| DISK_INFO='NAME="unknow" MOUNTPOINT="/" PKNAME="unknow"'
+	_DISK=${DISK_INFO#*PKNAME=\"}
+	DISK=${_DISK%%\"}
+	FILEPATH=/sys/block/${DISK}/queue/rotational
+	[ -e ${FILEPATH} ] && read CHECK < ${FILEPATH}
+	[ -n $CHECK ] && [ x$CHECK = "x0" ] && plymouth-set-default-theme deepin-ssd-logo
+	[ -n $CHECK ] && [ x$CHECK = "x1" ] && plymouth-set-default-theme deepin-logo
 	;;
-
     abort-upgrade|abort-deconfigure|abort-remove)
 	;;
-
     *)
 	echo "$0 called with unknown argument \`$1'" 1>&2
 	exit 1

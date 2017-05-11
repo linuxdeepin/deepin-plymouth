@@ -1,8 +1,57 @@
-plymouth-theme-deepin (14.04.14) trusty; urgency=low
+plymouth-theme-deepin (15.04.5) unstable; urgency=medium
+
+  * fix posinst
+
+ -- Deepin Packages Builder <packages@deepin.com>  Fri, 21 Apr 2017 10:11:07 +0800
+
+plymouth-theme-deepin (15.04.4) unstable; urgency=medium
+
+  * add judgement of ssd in postinst
+
+ -- Deepin Packages Builder <packages@deepin.com>  Thu, 20 Apr 2017 17:13:37 +0800
+
+plymouth-theme-deepin (15.04.3) unstable; urgency=medium
+
+  * fix deepin-ssd theme path
+
+ -- Deepin Packages Builder <packages@deepin.com>  Thu, 20 Apr 2017 15:17:32 +0800
+
+plymouth-theme-deepin (15.04.2) unstable; urgency=medium
+
+  * add deepin-ssd plymouth theme back. 
+
+ -- Deepin Packages Builder <packages@linuxdeepin.com>  Thu, 08 Sep 2016 10:02:51 +0800
+
+plymouth-theme-deepin (15.04.1) unstable; urgency=medium
+
+  * add label support. 
+
+ -- Deepin Packages Builder <packages@linuxdeepin.com>  Thu, 07 Jan 2016 23:48:14 +0800
+
+plymouth-theme-deepin (15.04.0) unstable; urgency=medium
+
+  * update plymouth theme pics. 
+
+ -- Deepin Packages Builder <packages@linuxdeepin.com>  Mon, 02 Nov 2015 09:42:00 +0800
+
+plymouth-theme-deepin (14.04.17) unstable; urgency=medium
+
+  * rebuild with plymouth. 
+
+ -- Deepin Packages Builder <packages@linuxdeepin.com>  Wed, 28 Oct 2015 14:23:16 +0800
+
+plymouth-theme-deepin (14.04.16) unstable; urgency=medium
+
+  * fix install file. 
+
+ -- Deepin Packages Builder <packages@linuxdeepin.com>  Tue, 02 Jun 2015 16:21:22 +0800
+
+plymouth-theme-deepin (14.04.15) unstable; urgency=low
 
   * fix boot splash to ensure show. 
+  * remove plymouth-label depends.
 
- -- Deepin Packages Builder <packages@linuxdeepin.com>  Wed, 22 Oct 2014 15:00:18 +0800
+ -- Deepin Packages Builder <packages@linuxdeepin.com>  Tue, 02 Jun 2015 15:46:50 +0800
 
 plymouth-theme-deepin (14.04.12) trusty; urgency=low
 

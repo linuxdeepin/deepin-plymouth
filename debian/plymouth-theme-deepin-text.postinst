@@ -18,14 +18,7 @@
 
 case "$1" in
     configure)
-	update-alternatives \
-		--install /lib/plymouth/themes/text.plymouth text.plymouth \
-		/lib/plymouth/themes/deepin-text/deepin-text.plymouth 80
-
-	if which update-initramfs >/dev/null 2>&1
-	then
-	    update-initramfs -u
-	fi
+	plymouth-set-default-theme deepin-text
 	;;
 
     abort-upgrade|abort-deconfigure|abort-remove)

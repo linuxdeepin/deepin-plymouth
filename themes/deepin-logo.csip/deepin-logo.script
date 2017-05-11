@@ -22,94 +22,31 @@
 Window.SetBackgroundTopColor(0, 0, 0);
 Window.SetBackgroundBottomColor(0, 0, 0);
 
-# Show logo
-logo.image = Image("loading2_300.png");
+logo.image = Image("logo.png");
 logo.sprite = Sprite(logo.image);
 logo.x = Window.GetX() + Window.GetWidth() / 2 - logo.image.GetWidth() / 2;
 logo.y = Window.GetY() + Window.GetHeight() / 2 - logo.image.GetHeight() / 2;
 logo.sprite.SetPosition(logo.x, logo.y, 10000);
-logo.sprite.SetOpacity(0);
 
-# add label
-label.image = Image("label.png");
-label.sprite = Sprite(label.image);
-label.x = Window.GetX() + Window.GetWidth() / 2 - label.image.GetWidth() / 2 ;
-label.y = Window.GetY() + Window.GetHeight() / 2 + logo.image.GetHeight() / 2 ;
-label.sprite.SetPosition(label.x, label.y, 10000);
-label.sprite.SetOpacity(0);
+boot.image = Image("boot.png");
+boot.sprite = Sprite(boot.image);
+boot.sprite.SetOpacity(0);
+boot.x = Window.GetX() + Window.GetWidth() / 2 - boot.image.GetWidth() / 2;
+boot.y = logo.y + logo.image.GetHeight() + 10;
+boot.sprite.SetPosition(boot.x, boot.y, 0);
 
-image_total = 300;
-
-# Loading
-for (i = 1; i <= image_total; i++) 
-{
-    loading[i].image = Image("loading2_" + i + ".png");
-    loading[i].sprite = Sprite(loading[i].image);
-    loading[i].sprite.SetOpacity(0);
-    loading[i].x = Window.GetX() + Window.GetWidth() / 2 - loading[i].image.GetWidth() / 2;
-    loading[i].y = Window.GetY() + Window.GetHeight() / 2 - loading[i].image.GetHeight() / 2;
-    loading[i].sprite.SetPosition(loading[i].x, loading[i].y, 0);
-}
-
-# shutdown
-for (i = 1; i <= image_total; i++) 
-{
-    shutdown[i].image = Image("shutdown_" + i + ".png");
-    shutdown[i].sprite = Sprite(shutdown[i].image);
-    shutdown[i].sprite.SetOpacity(0);
-    shutdown[i].x = Window.GetX() + Window.GetWidth() / 2 - shutdown[i].image.GetWidth() / 2;
-    shutdown[i].y = Window.GetY() + Window.GetHeight() / 2 - shutdown[i].image.GetHeight() / 2;
-    shutdown[i].sprite.SetPosition(shutdown[i].x, shutdown[i].y, 0);
-}
-
-index = 1;
-is_forward = 1;
-flag = 1;
 fun boot_callback() 
 {
-    # 50 frames per second
-    label.sprite.SetOpacity(1);
-	if (index >= image_total + 1) {
-		logo.sprite.SetOpacity(1);
-		
- 	} else {
-	    for (i = 1; i <= image_total; i++) 
-	    {
-	    	if (index != i) 
-	    	{
-	    		loading[i].sprite.SetOpacity(0);
-	    	} 
-	    	else 
-	    	{
-	    		loading[i].sprite.SetOpacity(1);
-	    	}
-	    }
-	    index++;
-	}
-	flag++;
+    boot.sprite.SetOpacity(1);
 }
 
 reboot_opacity = 1.0;
-reboot_index = 1;
 fun reboot_callback() 
 {
-    # 50 frames per second
-    label.sprite.SetOpacity(1);
-    for(j=1; j<=3; j++){
-        if (reboot_index >= image_total + 1) {
-            shutdown[300].sprite.SetOpacity(1);
-        }
-        else {
-            for (i = 1; i <= image_total; i++){
-                if (reboot_index != i){
-                    shutdown[i].sprite.SetOpacity(0);
-                } 
-                else{
-                    shutdown[i].sprite.SetOpacity(1);
-                }
-            }
-            reboot_index++;
-        }
+    boot.sprite.SetOpacity(0);
+    if (reboot_opacity > 0.2) {
+        reboot_opacity -= 0.005;
+        logo.sprite.SetOpacity(reboot_opacity);
     }
 }
 
@@ -122,7 +59,13 @@ else
     Plymouth.SetRefreshFunction(reboot_callback);
 }
 
-Plymouth.SetQuitFunction(reboot_callback);
+fun quit_callback() 
+{
+    boot.sprite.SetOpacity(0);
+    logo.sprite.SetOpacity(0);
+}
+
+Plymouth.SetQuitFunction(quit_callback);
 
 #----------------------------------------- Dialogue --------------------------------
 

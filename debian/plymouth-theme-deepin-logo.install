@@ -1,2 +1,2 @@
-themes/deepin-logo/ /lib/plymouth/themes/
-themes/deepin/ /lib/plymouth/themes/
+themes/deepin-logo/ /usr/share/plymouth/themes/
+themes/deepin-ssd-logo/ /usr/share/plymouth/themes/
