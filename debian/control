@@ -7,7 +7,7 @@ Standards-Version: 3.9.2
 
 Package: plymouth-theme-deepin-logo
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, plymouth
+Depends: ${shlibs:Depends}, ${misc:Depends}, plymouth, util-linux
 Provides: plymouth-theme
 Replaces: plymouth (<< 0.8.1-1~)
 Description: Plymouth theme for Linux Deepin
