@@ -26,9 +26,13 @@ case "$1" in
 	plymouth-set-default-theme deepin-logo
 	[ -n $CHECK ] && [ x$CHECK = "x0" ] && plymouth-set-default-theme deepin-ssd-logo
 	[ -n $CHECK ] && [ x$CHECK = "x1" ] && plymouth-set-default-theme deepin-logo
-	[ -f /etc/lightdm/lightdm-deepin-greeter.conf ] && ScreenScaleFactor=`sed '/^ScreenScaleFactor=/!d;s/.*=//' /etc/lightdm/lightdm-deepin-greeter.conf` && if [ $ScreenScaleFactor = "1.75" ] || [ $ScreenScaleFactor = "2" ]
+	[ -n $CHECK ] && [ x$CHECK = "x0" ] && [ -f /etc/lightdm/lightdm-deepin-greeter.conf ] && ScreenScaleFactor=`sed '/^ScreenScaleFactor=/!d;s/.*=//' /etc/lightdm/lightdm-deepin-greeter.conf` && if [ $ScreenScaleFactor = "1.75" ] || [ $ScreenScaleFactor = "2" ]
 	then
 		plymouth-set-default-theme deepin-hidpi-logo
+	fi
+	[ -n $CHECK ] && [ x$CHECK = "x1" ] && [ -f /etc/lightdm/lightdm-deepin-greeter.conf ] && ScreenScaleFactor=`sed '/^ScreenScaleFactor=/!d;s/.*=//' /etc/lightdm/lightdm-deepin-greeter.conf` && if [ $ScreenScaleFactor = "1.75" ] || [ $ScreenScaleFactor = "2" ]
+	then
+		plymouth-set-default-theme deepin-hidpi-ssd-logo
 	fi
 	if which update-initramfs > /dev/null 2>&1
 	then
