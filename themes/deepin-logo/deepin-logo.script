@@ -27,7 +27,7 @@ logo.image = Image("loading_300.png");
 logo.sprite = Sprite(logo.image);
 logo.x = Window.GetX() + Window.GetWidth() / 2 - logo.image.GetWidth() / 2;
 logo.y = Window.GetY() + Window.GetHeight() / 2 - logo.image.GetHeight() / 2;
-logo.sprite.SetPosition(logo.x, logo.y, 10000);
+logo.sprite.SetPosition(logo.x, logo.y, 9000);
 logo.sprite.SetOpacity(0);
 
 # add label
@@ -35,7 +35,7 @@ label.image = Image("label.png");
 label.sprite = Sprite(label.image);
 label.x = Window.GetX() + Window.GetWidth() / 2 - label.image.GetWidth() / 2 ;
 label.y = Window.GetY() + Window.GetHeight() / 2 + logo.image.GetHeight() / 2 ;
-label.sprite.SetPosition(label.x, label.y, 10000);
+label.sprite.SetPosition(label.x, label.y, 9000);
 label.sprite.SetOpacity(0);
 
 image_total = 300;
