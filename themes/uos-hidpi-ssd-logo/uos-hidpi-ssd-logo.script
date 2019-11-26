@@ -1,20 +1,20 @@
 # Copyright (C) 2011 ~ 2012 Deepin, Inc.
 #               2011 ~ 2012 Hou Shaohui
-# 
+#
 # Author:     Hou Shaohui <houshao55@gmail.com>
 # Maintainer: Hou Shaohui <houshao55@gmail.com>
 #             Zhai Xiang <zhaixiang@linuxdeepin.com>
-# 
+#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -30,7 +30,7 @@ logo.sprite.SetPosition(logo.x, logo.y, 10000);
 
 boot_opacity = 0.3;
 boot_flag = 1;
-fun boot_callback() 
+fun boot_callback()
 {
     if (boot_opacity >= 1){
         boot_flag = 0;
@@ -48,7 +48,7 @@ fun boot_callback()
 }
 
 reboot_opacity = 1.0;
-fun reboot_callback() 
+fun reboot_callback()
 {
     if (reboot_opacity > 0.2) {
         reboot_opacity -= 0.005;
@@ -59,13 +59,13 @@ fun reboot_callback()
 if (Plymouth.GetMode() == "boot")
 {
     Plymouth.SetRefreshFunction(boot_callback);
-} 
-else 
+}
+else
 {
     Plymouth.SetRefreshFunction(reboot_callback);
 }
 
-fun quit_callback() 
+fun quit_callback()
 {
     logo.sprite.SetOpacity(0);
 }
@@ -81,36 +81,36 @@ fun dialog_setup()
     local.box;
     local.lock;
     local.entry;
-    
+
     box.image = Image("box.png");
     lock.image = Image("lock.png");
     entry.image = Image("entry.png");
-    
+
     box.sprite = Sprite(box.image);
     box.x = Window.GetX() + Window.GetWidth()  / 2 - box.image.GetWidth ()/2;
     box.y = Window.GetY() + Window.GetHeight() / 2 - box.image.GetHeight()/2;
     box.z = 10000;
     box.sprite.SetPosition(box.x, box.y, box.z);
-    
+
     lock.sprite = Sprite(lock.image);
     lock.x = box.x + box.image.GetWidth()/2 - (lock.image.GetWidth() + entry.image.GetWidth()) / 2;
     lock.y = box.y + box.image.GetHeight()/2 - lock.image.GetHeight()/2;
     lock.z = box.z + 1;
     lock.sprite.SetPosition(lock.x, lock.y, lock.z);
-    
+
     entry.sprite = Sprite(entry.image);
     entry.x = lock.x + lock.image.GetWidth();
     entry.y = box.y + box.image.GetHeight()/2 - entry.image.GetHeight()/2;
     entry.z = box.z + 1;
     entry.sprite.SetPosition(entry.x, entry.y, entry.z);
-    
+
     global.dialog.box = box;
     global.dialog.lock = lock;
     global.dialog.entry = entry;
     global.dialog.bullet_image = Image("bullet.png");
     dialog_opacity (1);
   }
-    
+
 fun dialog_opacity(opacity)
   {
     dialog.box.sprite.SetOpacity (opacity);
@@ -146,7 +146,7 @@ fun display_password_callback (prompt, bullets)
             dialog.bullet[index].z = dialog.entry.z + 1;
             dialog.bullet[index].sprite.SetPosition(dialog.bullet[index].x, dialog.bullet[index].y, dialog.bullet[index].z);
           }
-        if (index < bullets)
+        if (index < bullets && index <= 28)
           dialog.bullet[index].sprite.SetOpacity(1);
         else
           dialog.bullet[index].sprite.SetOpacity(0);
