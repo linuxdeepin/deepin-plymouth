@@ -29,4 +29,4 @@ We encourage you to report issues and contribute changes
 
 ## License
 
-plymouth-theme-deepin is licensed under [GPLv3](https://github.com/linuxdeepin/plymouth-theme-deepin/blob/master/LICENSE).
+plymouth-theme-deepin is licensed under [GPLv3](LICENSE) or any later version.
