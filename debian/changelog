@@ -1,3 +1,9 @@
+plymouth-theme-deepin (15.10.17) unstable; urgency=medium
+
+  * update LOGO for uniontech.
+
+ -- Hu Feng <hufeng@uniontech.com>  Wed, 04 Aug 2021 15:15:31 +0800
+
 plymouth-theme-deepin (15.10.16) unstable; urgency=medium
 
   * Non-maintainer upload.
