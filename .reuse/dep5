@@ -1,0 +1,40 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: deepin-plymouth
+Upstream-Contact: UnionTech Software Technology Co., Ltd.
+Source: https://github.com/linuxdeepin/deepin-plymouth
+
+# Sample paragraph, commented out:
+#
+# Files: src/*
+# Copyright: $YEAR $NAME <$CONTACT>
+# License: ...
+
+# png
+Files: plymouth/themes/deepin-logo/*.png plymouth/themes/rhk-logo/*.png plymouth/themes/deepin-logo.csip/*.png plymouth/themes/rhk-logo/*.png
+Copyright: UnionTech Software Technology Co., Ltd.
+License: GPL-3.0-or-later
+
+# grub
+Files: plymouth/themes/deepin-logo.csip/deepin-logo.grub plymouth/themes/rhk-logo/*.grub
+Copyright: UnionTech Software Technology Co., Ltd.
+License: GPL-3.0-or-later
+
+# plymouth
+Files: plymouth/themes/deepin-logo.csip/deepin-logo.plymouth plymouth/themes/deepin-text/deepin-text.plymouth plymouth/themes/rhk-logo/*.plymouth
+Copyright: UnionTech Software Technology Co., Ltd.
+License: GPL-3.0-or-later
+
+# script
+Files: plymouth/themes/deepin-logo.csip/deepin-logo.script plymouth/themes/rhk-logo.script
+Copyright: UnionTech Software Technology Co., Ltd.
+License: GPL-3.0-or-later
+
+# gitignore
+Files: .gitignore
+Copyright: None
+License: CC0-1.0
+
+# README&DOC
+Files: README.md README.zh_CN.md
+Copyright: UnionTech Software Technology Co., Ltd.
+License: CC-BY-4.0
