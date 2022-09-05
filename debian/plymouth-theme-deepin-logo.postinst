@@ -1,0 +1,51 @@
+#!/bin/sh -e
+# This script can be called in the following ways:
+#
+# After the package was installed:
+#       <postinst> configure <old-version>
+#
+#
+# If prerm fails during upgrade or fails on failed upgrade:
+#       <old-postinst> abort-upgrade <new-version>
+#
+# If prerm fails during deconfiguration of a package:
+#       <postinst> abort-deconfigure in-favour <new-package> <version>
+#                  removing <old-package> <version>
+#
+# If prerm fails during replacement due to conflict:
+#       <postinst> abort-remove in-favour <new-package> <version>
+
+
+case "$1" in
+    configure)
+	DISK_INFO=`lsblk  -P -o NAME,MOUNTPOINT,PKNAME|grep 'MOUNTPOINT="/"'`|| DISK_INFO='NAME="unknow" MOUNTPOINT="/" PKNAME="unknow"'
+	_DISK=${DISK_INFO#*PKNAME=\"}
+	DISK=${_DISK%%\"}
+	FILEPATH=/sys/block/${DISK}/queue/rotational
+	[ -e ${FILEPATH} ] && read CHECK < ${FILEPATH}
+	plymouth-set-default-theme uos-ssd-logo
+	[ -n $CHECK ] && [ x$CHECK = "x0" ] && plymouth-set-default-theme uos-ssd-logo
+	[ -n $CHECK ] && [ x$CHECK = "x1" ] && plymouth-set-default-theme uos-ssd-logo
+	[ -n $CHECK ] && [ x$CHECK = "x0" ] && [ -f /etc/lightdm/lightdm-deepin-greeter.conf ] && ScreenScaleFactor=`sed '/^ScreenScaleFactor=/!d;s/.*=//' /etc/lightdm/lightdm-deepin-greeter.conf` && if [ $ScreenScaleFactor = "1.75" ] || [ $ScreenScaleFactor = "2" ]
+	then
+		plymouth-set-default-theme uos-hidpi-ssd-logo
+	fi
+	[ -n $CHECK ] && [ x$CHECK = "x1" ] && [ -f /etc/lightdm/lightdm-deepin-greeter.conf ] && ScreenScaleFactor=`sed '/^ScreenScaleFactor=/!d;s/.*=//' /etc/lightdm/lightdm-deepin-greeter.conf` && if [ $ScreenScaleFactor = "1.75" ] || [ $ScreenScaleFactor = "2" ]
+	then
+		plymouth-set-default-theme uos-hidpi-ssd-logo
+	fi
+	if which update-initramfs > /dev/null 2>&1
+	then
+		update-initramfs -u -k `uname -r`
+	fi
+	;;
+    abort-upgrade|abort-deconfigure|abort-remove)
+	;;
+    *)
+	echo "$0 called with unknown argument \`$1'" 1>&2
+	exit 1
+	;;
+esac
+
+#DEBHELPER#
+exit 0

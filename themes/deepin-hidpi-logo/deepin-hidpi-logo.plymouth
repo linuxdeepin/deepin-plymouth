@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Deepin-logo
+Description=Deepin-logo plugin. 
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/deepin-hidpi-logo
+ScriptFile=/usr/share/plymouth/themes/deepin-hidpi-logo/deepin-hidpi-logo.script

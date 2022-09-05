@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Deepin Logo for SSD
+Description=Deepin logo plymouth for ssd
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/deepin-hidpi-ssd-logo
+ScriptFile=/usr/share/plymouth/themes/deepin-hidpi-ssd-logo/deepin-hidpi-ssd-logo.script

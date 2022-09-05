@@ -1,0 +1,11 @@
+#15.10.9
+* fix plymouth ask-for-password not working on SSD themes
+
+#15.10.8
+* fix wrong SSD logo
+
+#15.10.7
+* add ssd-hidpi-logo
+
+#15.10.6
+* fix update theme reback 1.0 plymouth theme
