@@ -1,6 +1,6 @@
-# plymouth-theme-deepin
+# Deepin Plymouth Theme
 
-plymouth-theme-deepin project provides themes for plymouth that styled by deepin. 
+deepin-plymouth project provides themes for plymouth that styled by deepin. 
 
 ## Themes
 
@@ -10,6 +10,29 @@ plymouth-theme-deepin project provides themes for plymouth that styled by deepin
 | deepin-ssd-logo       | theme with a deepin logo in the center of the screen, statically. |
 | deepin-hidpi-logo     | deepin-logo with x2 version resources.                       |
 | deepin-hidpi-ssd-logo | deepin-ssd-logo with 2x version resources.                   |
+
+## Installation
+
+### Build from source code
+
+1. Make sure you have installed all dependencies.
+````
+sudo apt build-dep .
+````
+2. Build:
+
+````
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make
+````
+
+3. Install:
+````
+$ sudo make install
+````
+
 
 ## Getting help
 
@@ -29,4 +52,4 @@ We encourage you to report issues and contribute changes
 
 ## License
 
-plymouth-theme-deepin is licensed under [GPLv3](LICENSE) or any later version.
+deepin-plymouth is licensed under [GPL-3.0-or-later](LICENSE) or any later version.
