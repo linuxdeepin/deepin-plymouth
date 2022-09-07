@@ -1,0 +1,49 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: deepin-plymouth
+Upstream-Contact: UnionTech Software Technology Co., Ltd.
+Source: https://github.com/linuxdeepin/deepin-plymouth
+
+# png
+Files: themes/deepin-logo/*.png themes/rhk-logo/*.png themes/deepin-logo.csip/*.png plymouth/themes/rhk-logo/*.png themes/uos-hidpi-ssd-logo/*.png themes/deepin-ssd-logo/*.png themes/uos-ssd-logo/*.png themes/deepin-hidpi-ssd-logo/*.png themes/deepin-hidpi-logo/*.png
+Copyright: UnionTech Software Technology Co., Ltd.
+License: GPL-3.0-or-later
+
+# README&DOC
+Files: README.md README.zh_CN.md
+Copyright: UnionTech Software Technology Co., Ltd.
+License: CC-BY-4.0
+
+# grub
+Files: themes/deepin-hidpi-logo/*.grub themes/deepin-hidpi-ssd-logo/*.grub themes/deepin-logo/*.grub themes/deepin-ssd-logo/*.grub themes/uos-hidpi-ssd-logo/*.grub themes/uos-ssd-logo/*.grub
+Copyright: UnionTech Software Technology Co., Ltd.
+License: GPL-3.0-or-later
+
+# script
+Files: themes/deepin-hidpi-logo/deepin-hidpi-logo.script themes/deepin-hidpi-ssd-logo/deepin-hidpi-ssd-logo.script themes/deepin-logo/deepin-logo.script themes/deepin-ssd-logo/deepin-ssd-logo.script themes/uos-hidpi-ssd-logo/uos-hidpi-ssd-logo.script themes/uos-ssd-logo/uos-ssd-logo.script
+Copyright: UnionTech Software Technology Co., Ltd.
+License: GPL-3.0-or-later
+
+# plymouth
+Files: themes/deepin-hidpi-logo/deepin-hidpi-logo.plymouth themes/deepin-hidpi-ssd-logo/deepin-hidpi-ssd-logo.plymouth themes/deepin-logo/deepin-logo.plymouth themes/deepin-ssd-logo/deepin-ssd-logo.plymouth themes/deepin-text/deepin-text.plymouth themes/uos-hidpi-ssd-logo/uos-hidpi-ssd-logo.plymouth themes/uos-ssd-logo/uos-ssd-logo.plymouth
+Copyright: UnionTech Software Technology Co., Ltd.
+License: GPL-3.0-or-later
+
+# ci
+Files: .github/* .gitlab-ci.yml
+Copyright: None
+License: CC0-1.0
+
+# debian rpm archlinux
+Files: debian/* archlinux/*
+Copyright: None
+License: CC0-1.0
+
+# CHANGELOG
+Files: CHANGELOG
+Copyright: None
+License: CC0-1.0
+
+# shell
+Files: tools/plymouth-test
+Copyright: UnionTech Software Technology Co., Ltd.
+License: GPL-3.0-or-later
