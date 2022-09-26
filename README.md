@@ -52,4 +52,4 @@ We encourage you to report issues and contribute changes
 
 ## License
 
-deepin-plymouth is licensed under [GPL-3.0-or-later](LICENSE) or any later version.
+deepin-plymouth is licensed under [GPL-3.0-or-later](LICENSE).
