@@ -18,20 +18,22 @@ deepin-plymouth项目提供了由 deepin 设计的 plymouth 主题.
 1. 确保已经安装了所有的编译依赖.
 ````
 sudo apt build-dep .
-````
-2. 构建:
 
 ````
-mkdir build
-cd build
-cmake ..
-make
+2. 安装打包工具.
 ````
-
-3. 安装:
+$ sudo apt install git-buildpackage
 
 ````
-sudo make install
+
+3. 编译打包:
+````
+$ gbp buildpackage
+````
+
+4. 安装打好的包:
+````
+$ sudo dpkg -i ../plymouth-theme-deepin-logo*.deb
 ````
 
 ## 帮助

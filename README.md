@@ -17,20 +17,23 @@ deepin-plymouth project provides themes for plymouth that styled by deepin.
 
 1. Make sure you have installed all dependencies.
 ````
-sudo apt build-dep .
-````
-2. Build:
-
-````
-$ mkdir build
-$ cd build
-$ cmake ..
-$ make
+$ sudo apt build-dep .
 ````
 
-3. Install:
+2. Install build tools.
 ````
-$ sudo make install
+$ sudo apt install git-buildpackage
+
+````
+
+3. Build:
+````
+$ gbp buildpackage
+````
+
+4. Install:
+````
+$ sudo dpkg -i ../plymouth-theme-deepin-logo*.deb
 ````
 
 
