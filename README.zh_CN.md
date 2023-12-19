@@ -20,10 +20,10 @@ deepin-plymouth项目提供了由 deepin 设计的 plymouth 主题.
 sudo apt build-dep .
 
 ````
+
 2. 安装打包工具.
 ````
 $ sudo apt install git-buildpackage
-
 ````
 
 3. 编译打包:

@@ -23,7 +23,6 @@ $ sudo apt build-dep .
 2. Install build tools.
 ````
 $ sudo apt install git-buildpackage
-
 ````
 
 3. Build:
